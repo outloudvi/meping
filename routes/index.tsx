@@ -5,15 +5,15 @@ import { tw } from '@twind'
 export default function Home() {
   return (
     <div class={tw`p-4 mx-auto max-w-screen-md`}>
-      <img
-        src="/logo.svg"
-        height="100px"
-        alt="the fresh logo: a sliced lemon dripping with juice"
-      />
-      <p class={tw`my-6`}>
-        Welcome to `fresh`. Try update this message in the ./routes/index.tsx
-        file, and refresh.
-      </p>
+      <h1 className={tw`text-4xl`}>MePing</h1>
+      <a href="https://t.me/itsmepingbot">
+        <img
+          className={tw`mt-4`}
+          src="https://img.shields.io/badge/Telegram-%40itsmepingbot-blue.svg"
+          height="100px"
+          alt="Telegram bot @itsmepingbot"
+        />
+      </a>
     </div>
   )
 }
