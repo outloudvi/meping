@@ -1,38 +1,31 @@
 /** @jsx h */
 import { h } from 'preact'
-import { PageProps } from '$fresh/server.ts'
-import { tw } from 'twind'
+import { Handlers, PageProps } from '$fresh/server.ts'
+import { TURNSTILE_SITE_KEY } from '@utils/env.ts'
+import { PingPageProps } from '../../types.ts'
+import Ping from '../../islands/Ping.tsx'
 
-interface PingPageProps {
+interface RouteProps {
   pin: string
 }
 
-export default function Page(props: PageProps<PingPageProps>) {
-  const pin = props.params.pin
+export const handler: Handlers<PingPageProps, RouteProps> = {
+  async GET(_req, ctx) {
+    const pin = Number.parseInt(ctx.params.pin)
+    if (Number.isNaN(pin)) {
+      return new Response('Invalid PIN', {
+        status: 400,
+      })
+    }
 
-  const requestPing = (pin: string) => {
-    fetch(`/api/ping/${pin}`, {
-      method: 'POST',
-    }).then((x) => {
-      if (x.status === 200) {
-        alert('Pinged!')
-      } else if (x.status === 404) {
-        alert('PIN not found!')
-      } else {
-        alert('Unknown error :(')
-      }
+    return ctx.render({
+      pin,
+      tsSitekey: TURNSTILE_SITE_KEY ?? '',
     })
-  }
+  },
+}
 
-  return (
-    <div className={tw`text-center mt-3`}>
-      <div>Do you want to ping #{pin}?</div>
-      <button
-        className={tw`mt-2 p-2 border-solid border-2 rounded`}
-        onClick={() => requestPing(pin)}
-      >
-        Ping
-      </button>
-    </div>
-  )
+export default function PingPage(props: PageProps<PingPageProps>) {
+  const { pin, tsSitekey } = props.data
+  return <Ping pin={pin} tsSitekey={tsSitekey} />
 }

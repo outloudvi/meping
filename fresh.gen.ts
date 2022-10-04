@@ -7,6 +7,7 @@ import * as $0 from "./routes/api/ping/[pin].ts";
 import * as $1 from "./routes/api/telegram/[secret].ts";
 import * as $2 from "./routes/index.tsx";
 import * as $3 from "./routes/ping/[pin].tsx";
+import * as $$0 from "./islands/Ping.tsx";
 
 const manifest = {
   routes: {
@@ -15,7 +16,9 @@ const manifest = {
     "./routes/index.tsx": $2,
     "./routes/ping/[pin].tsx": $3,
   },
-  islands: {},
+  islands: {
+    "./islands/Ping.tsx": $$0,
+  },
   baseUrl: import.meta.url,
   config,
 };
