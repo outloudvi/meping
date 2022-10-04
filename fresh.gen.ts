@@ -2,11 +2,11 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/api/ping/[pin].ts";
 import * as $1 from "./routes/api/telegram/[secret].ts";
 import * as $2 from "./routes/index.tsx";
 import * as $3 from "./routes/ping/[pin].tsx";
-import * as $$0 from "./islands/PingPage.tsx";
 
 const manifest = {
   routes: {
@@ -15,10 +15,9 @@ const manifest = {
     "./routes/index.tsx": $2,
     "./routes/ping/[pin].tsx": $3,
   },
-  islands: {
-    "./islands/PingPage.tsx": $$0,
-  },
+  islands: {},
   baseUrl: import.meta.url,
+  config,
 };
 
 export default manifest;
